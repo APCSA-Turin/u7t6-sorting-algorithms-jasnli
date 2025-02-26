@@ -19,42 +19,67 @@ public class InsertionSort {
 
     // PART A. implementing insertion sort
     public static int[] insertionSort(int[] elements) {
+        int loopCounter = 0;
         for (int i = 1; i < elements.length; i++) {
             int inthedex = i;
-            while (inthedex >= 1) {
-                if (elements[inthedex] < elements[inthedex - 1]) {
-                    int temp = elements[inthedex - 1];
-                    elements[inthedex - 1] = elements[inthedex];
-                    elements[inthedex] = temp;   
-                }
+            while (inthedex >= 1 && (elements[inthedex] < elements[inthedex - 1])) {
+                loopCounter++;
+                int temp = elements[inthedex - 1];
+                elements[inthedex - 1] = elements[inthedex];
+                elements[inthedex] = temp;   
                 inthedex --;
                 
             }
         }
+        System.out.println("LOOP COUNTER: INSERTION: " + loopCounter);
         return elements;
     }
 
    
     public static void selectionSort(int[] elements) {
-        
+        int loopCounter = 0;
+        for (int i = 0 ; i < elements.length ; i++ ) {
+            int smallest = Integer.MAX_VALUE;
+            int smallestIdx = i;
+            for (int j = i + 1 ; j < elements.length ; j++) {
+                loopCounter ++;
+                if (elements[j] < smallest) {
+                    smallest = elements[j];
+                    smallestIdx = j;
+                }
+            }
+            int temp = elements[i];
+            elements[i] = smallest;
+            elements[smallestIdx] = temp;
+
+        }
+        System.out.println("LOOP COUNTER: SELECTION: " + loopCounter);
     }
 
     // PART B. sorting a 1000-word list
     public static ArrayList<String> insertionSortWordList(ArrayList<String> words) {
         for (int i = 1; i < words.size(); i++) {
             int inthedex = i;
-            while (inthedex >= 1) {
-                if (words.get(inthedex).compareTo(words.get(inthedex - 1)) < 0) {
-                    words.set(inthedex, words.set(inthedex - 1, words.get(inthedex)));
-                }
+            while (inthedex >= 1 && (words.get(inthedex).compareTo(words.get(inthedex - 1)) < 0)) { 
+                words.set(inthedex, words.set(inthedex - 1, words.get(inthedex)));
                 inthedex --;
-                
             }
         }
         return words;
     }
 
     public static void selectionSortWordList(ArrayList<String> words) {
+        for (int i = 0 ; i < words.size() ; i++ ) {
+            String smallest = "zzz";
+            int smallestIdx = i;
+            for (int j = i + 1 ; j < words.size() ; j++) {
+                if (words.get(j).compareTo(smallest) < 0) {
+                    smallest = words.get(j);
+                    smallestIdx = j;
+                }
+            }
+            words.set(i, words.set(smallestIdx, words.get(i)));
+        }
     }
 
     public static ArrayList<String> loadWordsInto(ArrayList<String> wordList) {
